@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Heart, Users, Clock, Instagram, Facebook, Youtube, Leaf, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useScrollEffects } from '../hooks/useScrollEffects';
+import ScrollReveal from '../components/ScrollReveal';
+import ParallaxSection from '../components/ParallaxSection';
 
 const heroContent = [
   {
@@ -44,6 +47,9 @@ const heroContent = [
 
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Initialize smooth scroll
+  useScrollEffects();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -68,55 +74,60 @@ const Home = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="relative h-[90vh] flex items-center overflow-hidden"
+        className="relative h-screen flex items-center overflow-hidden"
       >
         <AnimatePresence mode='wait'>
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
             className="absolute inset-0"
             style={{
               backgroundImage: `url("${heroContent[currentIndex].image}")`,
               backgroundSize: 'cover',
-              backgroundPosition: 'center'
+              backgroundPosition: 'center',
+              backgroundAttachment: 'fixed'
             }}
           />
         </AnimatePresence>
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70"
+          animate={{ opacity: [0.5, 0.7, 0.5] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.h1
               key={`title-${currentIndex}`}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ delay: 0.2 }}
+              initial={{ y: 50, opacity: 0, scale: 0.9 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -30, opacity: 0, scale: 1.1 }}
+              transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
               className="text-4xl md:text-6xl font-bold text-white mb-6"
             >
               {heroContent[currentIndex].title}
             </motion.h1>
             <motion.p
               key={`desc-${currentIndex}`}
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -20, opacity: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
               className="text-xl text-white mb-8"
             >
               {heroContent[currentIndex].description}
             </motion.p>
             <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              initial={{ y: 30, opacity: 0, scale: 0.9 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              transition={{ delay: 0.9, duration: 0.6 }}
               className="space-x-4"
             >
               <Link
                 to="/consultation"
-                className="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-green-700 transition-colors inline-block"
+                className="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-green-700 hover:scale-105 transition-all duration-300 inline-block shadow-lg hover:shadow-xl"
               >
                 Begin Your Wellness Journey
               </Link>
@@ -125,14 +136,14 @@ const Home = () => {
         </div>
 
         {/* Image Navigation Dots */}
-        <div className="absolute bottom-8 left-0 right-0">
+        <div className="absolute bottom-12 left-0 right-0">
           <div className="flex justify-center space-x-2">
             {heroContent.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? 'bg-white scale-125' : 'bg-white/50'
+                  index === currentIndex ? 'bg-white scale-125 shadow-lg' : 'bg-white/50 hover:bg-white/70'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
@@ -142,122 +153,146 @@ const Home = () => {
       </motion.section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white relative overflow-hidden">
+        <ParallaxSection speed={0.3} className="absolute inset-0 opacity-5">
+          <div className="w-full h-full bg-gradient-to-br from-green-100 to-blue-100" />
+        </ParallaxSection>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Services</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Discover our comprehensive range of Ayurvedic treatments and consultations
-            </p>
-          </div>
+          <ScrollReveal direction="up" delay={0.2}>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Our Services</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Discover our comprehensive range of Ayurvedic treatments and consultations
+              </p>
+            </div>
+          </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gray-50 p-8 rounded-lg text-center"
-            >
-              <Heart className="h-12 w-12 text-green-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Holistic Healing</h3>
-              <p className="text-gray-600">Natural and comprehensive approach to wellness through traditional Ayurvedic practices</p>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gray-50 p-8 rounded-lg text-center"
-            >
-              <Users className="h-12 w-12 text-green-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Expert Doctors</h3>
-              <p className="text-gray-600">Experienced Ayurvedic practitioners with deep knowledge of traditional medicine</p>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gray-50 p-8 rounded-lg text-center"
-            >
-              <Clock className="h-12 w-12 text-green-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>
-              <p className="text-gray-600">Round-the-clock care and assistance for your wellness journey</p>
-            </motion.div>
+            <ScrollReveal direction="up" delay={0.1}>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -10 }}
+                className="bg-gray-50 p-8 rounded-lg text-center shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <Heart className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Holistic Healing</h3>
+                <p className="text-gray-600">Natural and comprehensive approach to wellness through traditional Ayurvedic practices</p>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.3}>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -10 }}
+                className="bg-gray-50 p-8 rounded-lg text-center shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <Users className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Expert Doctors</h3>
+                <p className="text-gray-600">Experienced Ayurvedic practitioners with deep knowledge of traditional medicine</p>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.5}>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -10 }}
+                className="bg-gray-50 p-8 rounded-lg text-center shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <Clock className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>
+                <p className="text-gray-600">Round-the-clock care and assistance for your wellness journey</p>
+              </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* Coming Soon Section */}
-      <section className="py-16 bg-green-50">
+      <section className="py-16 bg-green-50 relative overflow-hidden">
+        <ParallaxSection speed={0.2} className="absolute inset-0 opacity-10">
+          <div className="w-full h-full bg-gradient-to-tr from-green-200 to-emerald-200" />
+        </ParallaxSection>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
+          <ScrollReveal direction="scale" delay={0.2}>
+            <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Coming Soon</h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 We're expanding our services to serve you better
               </p>
-            </motion.div>
-          </div>
+            </div>
+          </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-white p-6 rounded-lg shadow-md"
-            >
-              <Calendar className="h-10 w-10 text-green-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Online Appointments</h3>
-              <p className="text-gray-600">Easy scheduling system for virtual consultations</p>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-white p-6 rounded-lg shadow-md"
-            >
-              <Leaf className="h-10 w-10 text-green-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Herbal Store</h3>
-              <p className="text-gray-600">Premium Ayurvedic products and supplements</p>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-white p-6 rounded-lg shadow-md"
-            >
-              <Users className="h-10 w-10 text-green-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Wellness Programs</h3>
-              <p className="text-gray-600">Comprehensive health and lifestyle packages</p>
-            </motion.div>
+            <ScrollReveal direction="left" delay={0.1}>
+              <motion.div
+                whileHover={{ scale: 1.05, rotateY: 5 }}
+                className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+              >
+                <Calendar className="h-10 w-10 text-green-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Online Appointments</h3>
+                <p className="text-gray-600">Easy scheduling system for virtual consultations</p>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.3}>
+              <motion.div
+                whileHover={{ scale: 1.05, rotateY: 5 }}
+                className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+              >
+                <Leaf className="h-10 w-10 text-green-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Herbal Store</h3>
+                <p className="text-gray-600">Premium Ayurvedic products and supplements</p>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal direction="right" delay={0.5}>
+              <motion.div
+                whileHover={{ scale: 1.05, rotateY: 5 }}
+                className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
+              >
+                <Users className="h-10 w-10 text-green-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Wellness Programs</h3>
+                <p className="text-gray-600">Comprehensive health and lifestyle packages</p>
+              </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* Social Media Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white relative overflow-hidden">
+        <ParallaxSection speed={0.4} className="absolute inset-0 opacity-5">
+          <div className="w-full h-full bg-gradient-to-bl from-purple-100 to-pink-100" />
+        </ParallaxSection>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Connect With Us</h2>
-          <div className="flex justify-center space-x-8">
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              href="https://www.instagram.com/ayusaarofficial/"
-              // target="https://www.instagram.com/ayusaarofficial/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-full text-white"
-            >
-              <Instagram className="h-8 w-8" />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              href="https://www.facebook.com/profile.php?id=61574223710354"
-              // target="https://www.facebook.com/profile.php?id=61574223710354"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-600 p-3 rounded-full text-white"
-            >
-              <Facebook className="h-8 w-8" />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              href="https://www.youtube.com/@Ayusaar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-400 p-3 rounded-full text-white"
-            >
-              <Youtube className="h-8 w-8" />
-            </motion.a>
-          </div>
+          <ScrollReveal direction="fade" delay={0.2}>
+            <h2 className="text-3xl font-bold text-center mb-12">Connect With Us</h2>
+          </ScrollReveal>
+          <ScrollReveal direction="scale" delay={0.4}>
+            <div className="flex justify-center space-x-8">
+              <motion.a
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+                href="https://www.instagram.com/ayusaarofficial/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 p-4 rounded-full text-white shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <Instagram className="h-8 w-8" />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.2, rotate: -5 }}
+                whileTap={{ scale: 0.9 }}
+                href="https://www.facebook.com/profile.php?id=61574223710354"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-600 p-4 rounded-full text-white shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <Facebook className="h-8 w-8" />
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+                href="https://www.youtube.com/@Ayusaar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-red-600 p-4 rounded-full text-white shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <Youtube className="h-8 w-8" />
+              </motion.a>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </>
