@@ -250,6 +250,230 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Ayurvedic Products Gallery */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <ParallaxSection speed={0.3} className="absolute inset-0 opacity-5">
+          <div className="w-full h-full bg-gradient-to-br from-amber-100 to-orange-100" />
+        </ParallaxSection>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal direction="up" delay={0.2}>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">Authentic Ayurvedic Products</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Discover our collection of pure, traditional Ayurvedic medicines and wellness products
+              </p>
+            </div>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <ScrollReveal direction="up" delay={0.1}>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -10 }}
+                className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                <div className="relative overflow-hidden rounded-lg mb-4">
+                  <img
+                    src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=400&auto=format&fit=crop&q=60"
+                    alt="Ayurvedic Herbs"
+                    className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="text-lg font-semibold text-green-800 mb-2">Traditional Herbs</h3>
+                <p className="text-gray-600 text-sm">Pure medicinal herbs sourced from organic farms</p>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.2}>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -10 }}
+                className="bg-gradient-to-br from-amber-50 to-yellow-50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                <div className="relative overflow-hidden rounded-lg mb-4">
+                  <img
+                    src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&auto=format&fit=crop&q=60"
+                    alt="Ayurvedic Oils"
+                    className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="text-lg font-semibold text-green-800 mb-2">Therapeutic Oils</h3>
+                <p className="text-gray-600 text-sm">Cold-pressed oils for massage and healing</p>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.3}>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -10 }}
+                className="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                <div className="relative overflow-hidden rounded-lg mb-4">
+                  <img
+                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&auto=format&fit=crop&q=60"
+                    alt="Ayurvedic Powders"
+                    className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="text-lg font-semibold text-green-800 mb-2">Herbal Powders</h3>
+                <p className="text-gray-600 text-sm">Finely ground medicinal powders and churnas</p>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.4}>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -10 }}
+                className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                <div className="relative overflow-hidden rounded-lg mb-4">
+                  <img
+                    src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&auto=format&fit=crop&q=60"
+                    alt="Ayurvedic Tablets"
+                    className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <h3 className="text-lg font-semibold text-green-800 mb-2">Natural Supplements</h3>
+                <p className="text-gray-600 text-sm">Herbal tablets and capsules for daily wellness</p>
+              </motion.div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Customer Reviews Section */}
+      <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-50 relative overflow-hidden">
+        <ParallaxSection speed={0.4} className="absolute inset-0 opacity-10">
+          <div className="w-full h-full bg-gradient-to-tl from-green-200 to-blue-200" />
+        </ParallaxSection>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal direction="up" delay={0.2}>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-4">What Our Patients Say</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Real experiences from people who have transformed their health with Ayusaar
+              </p>
+            </div>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <ScrollReveal direction="left" delay={0.1}>
+              <motion.div
+                whileHover={{ scale: 1.02, rotateY: 2 }}
+                className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 relative"
+              >
+                <div className="absolute -top-4 -left-4 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-lg font-bold">"</span>
+                </div>
+                <div className="flex items-center mb-6">
+                  <img
+                    src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&auto=format&fit=crop&q=60"
+                    alt="Priya Sharma"
+                    className="w-16 h-16 rounded-full object-cover mr-4 border-4 border-green-100"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-gray-800">Priya Sharma</h4>
+                    <p className="text-gray-500 text-sm">Mumbai, Maharashtra</p>
+                  </div>
+                </div>
+                <p className="text-gray-600 mb-4 italic">
+                  "Ayusaar's holistic approach completely transformed my digestive health. The personalized treatment plan and natural remedies worked wonders where modern medicine couldn't help."
+                </p>
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="text-lg"
+                    >
+                      ⭐
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal direction="up" delay={0.3}>
+              <motion.div
+                whileHover={{ scale: 1.02, rotateY: 2 }}
+                className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 relative"
+              >
+                <div className="absolute -top-4 -left-4 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-lg font-bold">"</span>
+                </div>
+                <div className="flex items-center mb-6">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60"
+                    alt="Rajesh Kumar"
+                    className="w-16 h-16 rounded-full object-cover mr-4 border-4 border-green-100"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-gray-800">Rajesh Kumar</h4>
+                    <p className="text-gray-500 text-sm">Delhi, India</p>
+                  </div>
+                </div>
+                <p className="text-gray-600 mb-4 italic">
+                  "After years of joint pain, Ayusaar's Panchakarma therapy and herbal medicines gave me a new lease on life. I'm pain-free and more energetic than ever!"
+                </p>
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="text-lg"
+                    >
+                      ⭐
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal direction="right" delay={0.5}>
+              <motion.div
+                whileHover={{ scale: 1.02, rotateY: 2 }}
+                className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 relative"
+              >
+                <div className="absolute -top-4 -left-4 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                  <span className="text-white text-lg font-bold">"</span>
+                </div>
+                <div className="flex items-center mb-6">
+                  <img
+                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&auto=format&fit=crop&q=60"
+                    alt="Meera Patel"
+                    className="w-16 h-16 rounded-full object-cover mr-4 border-4 border-green-100"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-gray-800">Meera Patel</h4>
+                    <p className="text-gray-500 text-sm">Ahmedabad, Gujarat</p>
+                  </div>
+                </div>
+                <p className="text-gray-600 mb-4 italic">
+                  "The stress management techniques and herbal supplements from Ayusaar helped me overcome anxiety naturally. Their doctors truly understand mind-body connection."
+                </p>
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="text-lg"
+                    >
+                      ⭐
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+            </ScrollReveal>
+          </div>
+          <ScrollReveal direction="scale" delay={0.7}>
+            <div className="text-center mt-12">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="inline-block bg-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <p className="text-green-600 font-semibold text-lg">
+                  Join 10,000+ satisfied patients who chose natural healing
+                </p>
+              </motion.div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
       {/* Social Media Section */}
       <section className="py-16 bg-white relative overflow-hidden">
         <ParallaxSection speed={0.4} className="absolute inset-0 opacity-5">
